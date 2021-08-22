@@ -1,60 +1,84 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { PlayerDetails, PlayerInfo } from "../models/player";
+import { trigger, state, style, transition, animate } from "@angular/animations";
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
+import { DisplayProfile, PlayerDetails, PlayerInfo } from "../models/player";
 import { HomeComponentService } from "../service/home-component.service";
 
 @Component({
     selector:"home-component",
     templateUrl:"./home-component.html",
-    styleUrls:["./home-component.scss"]
+    styleUrls:["./home-component.scss"],
+    animations: [
+        trigger('appearIn', [
+            transition(':enter', [
+                style({ opacity: 0 }),
+                animate('600ms', style({ opacity: 1 })),
+              ]),
+        ]),
+      ]
 })
 
 export class HomeComponent implements OnInit {
 
     playerSearchForm !: FormGroup;
     playerNameVal!: string;
+    active:boolean = false;
+    showResult:boolean = false;
+    displayDetail?:DisplayProfile;
+    showSearch: boolean = false;
+
     constructor( private readonly homeComponentService: HomeComponentService,
         private readonly fb: FormBuilder ) {
         this.playerSearchForm = this.fb.group({
-            playerName: ['',[Validators.pattern("[a-zA-Z][A-Za-z .-]*")]],
+            playerName: new FormControl('',Validators.pattern("[a-zA-Z][a-zA-Z0-9 ]*")),
         });
     }
 
-    ngOnInit() {
-        
+    ngOnInit() {}
+
+    ngAfterViewInit() {
+        setTimeout(()=> {
+            this.showSearch = true;
+        },600);
     }
+
     get getForm(){
         return this.playerSearchForm.controls;
     }
 
     search() {
         if(this.playerNameVal) {
-            this.playerNameVal.trim();
-            this.homeComponentService.getPlayerData(this.playerNameVal).subscribe((respose : PlayerInfo) => {
-                if(respose && respose.active && respose.active === "true") {
-                    this.fetchPlayerDetails(respose["profile-id"]);
-                } else alert ("No player");
-            },()=> {                
-            console.log("Something went wrong with the data API");
-                alert ("No player");
+            this.playerNameVal = this.playerNameVal.trim();
+            this.homeComponentService.getPlayerData(this.playerNameVal.toLowerCase()).subscribe((playerInfo : PlayerInfo) => {
+                this.showResult=true;
+                if(playerInfo && playerInfo.active && playerInfo.active === "true") {
+                    this.fetchPlayerDetails(playerInfo["profile-id"]);
+                } else {
+                    this.active=false;
+                }
+            },()=> {
+                this.showResult=true;
+                this.active=false;          
+                console.log("Something went wrong with the PLAYER DATA API");
             });
         }
     }
 
     fetchPlayerDetails(profileId:string) { 
-        this.homeComponentService.getPlayerProfile(profileId).subscribe((response:PlayerDetails) => {
-            if(response) {
-                const obj = {
-                    ID: response.id,
-                    ACTIVE: true,
-                    AGE: response.profile.age,
-                    ROLE: response.profile.role,
-                    TEAM: response.profile.team
+        this.homeComponentService.getPlayerProfile(profileId).subscribe((playerDetails:PlayerDetails) => {
+            if(playerDetails) {
+                this.active=true;
+                this.displayDetail = {
+                    id: playerDetails.id,
+                    active: 'true',
+                    age: playerDetails.profile.age,
+                    role: playerDetails.profile.role,
+                    team: playerDetails.profile.team
                 }
-                console.log(obj);
+                console.log(this.displayDetail);
             } 
         },() => {
-            console.log("Something went wrong with the profile API");
+            console.log("Something went wrong with the PLAYER PROFILE API");
         })
 
     }

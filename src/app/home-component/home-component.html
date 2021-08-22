@@ -1,36 +1,61 @@
-<div fxFlexFill fxLayout="column">
-    <mat-card class="search-container" fxFlex fxLayout="column">
-        <form [formGroup]="playerSearchForm">
-                <div fxLayoutAlign ="center center" class="sub-heading"> Search by Player's name</div>
-                <div fxLayout="row wrap" fxLayoutAlign ="center center">
-                        <div fxLayout="column">
-                            <mat-form-field>
-                                <!-- appearance="outline" -->
-                                <mat-label>Player name</mat-label>                                
-                                <!-- charOnly -->
-                                <input
-                                autocomplete="off"
-                                matInput
-                                maxlength="25"
-                                placeholder = "Enter search text"
-                                type="text"      
-                                formControlName="playerName"
-                                #firstName
-                                [(ngModel)]="playerNameVal"        
-                                />
-                                <mat-error *ngIf="getForm.playerName.errors?.pattern">Allowed . and -</mat-error>
-                            </mat-form-field>
+<div fxFlexFill fxLayout="column" class="scroll-container" fxLayoutAlign ="start start">
+    <div fxFlex fxLayout="column" fxLayoutAlign ="start stretch">
+        <div fxFlex fxLayout="row" fxLayoutAlign ="center center"><div class="heading">PLAYER ARCHIVE</div></div>
+    </div>
+    <div fxLayout="column" fxFlexFill class="scroll-container" fxLayouAlign="start stretch">
+        <div fxLayout="row" fxLayoutAlign ="center center" @appearIn *ngIf="showSearch">
+            <mat-card fxLayout="column" fxFlex.gt-xs="50" fxFlex.lt-sm="80" class="container"   fxLayoutAlign ="center center" >
+                <form [formGroup]="playerSearchForm">
+                        <div fxLayoutAlign="center" class="sub-heading"> Search</div>
+                        <div fxLayout="row wrap" fxLayoutAlign ="center center">
+                                <div fxLayout="column">
+                                    <mat-form-field  appearance="fill">
+                                        <mat-label>Enter Player's Id </mat-label>                                
+                                        <!-- charOnly -->
+                                        <input
+                                        appFocus
+                                        autocomplete="off"
+                                        matInput
+                                        maxlength="25"
+                                        type="text"      
+                                        formControlName="playerName"
+                                        #playerName
+                                        [(ngModel)]="playerNameVal"        
+                                        />
+                                        <mat-error *ngIf="getForm.playerName?.errors?.pattern">Please use characters & numbers only</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            <div fxLayout="row">
+                                <button
+                                class="primary button-margin"
+                                [disabled]="!playerNameVal || playerSearchForm.invalid"
+                                (click)="search()" 
+                                mat-raised-button mat-primary>	<mat-icon inline=true> directions_run</mat-icon> Go </button>
+                            </div>
                         </div>
-                    <div fxLayout="row">
-                        <button
-                        [disabled]="false"
-                        (click)="search()" 
-                        mat-raised-button mat-primary> Search</button>
-                        <button 
-                        (click)="clear()"
-                        mat-raised-button> Clear</button>
-                    </div>
+                    </form>
+            </mat-card>
+        </div>
+        <div @appearIn fxLayout="row" *ngIf="showResult && active" fxLayoutAlign ="center center" >
+            <mat-card fxLayout="column" fxFlex.gt-xs="50" fxFlex.lt-sm="80" class="container">
+                <div fxLayout="row" fxFlex fxLayoutAlign="center center" class="sub-heading">Player Details
                 </div>
-            </form>
-    </mat-card>
+                <div fxLayoutAlign="start start" fxLayout="column">
+                    <div><label>Id:</label><span>{{ (displayDetail?.id | titlecase) || '-'}}</span></div>
+                    <div><label>Active:</label><span>{{ (displayDetail?.active || 'False')  | titlecase}}</span></div>
+                    <br>
+                    <div><label>Age:</label><span>{{ displayDetail?.age || '-'}}</span></div>
+                    <div><label>Role:</label><span>{{ (displayDetail?.role | titlecase) || '-'}}</span></div>
+                    <div><label>Team: </label><span>{{ (displayDetail?.team | titlecase) || '-'}}</span></div>
+                </div>
+            </mat-card>
+        </div>
+        <div @appearIn fxLayout="row" *ngIf="showResult && !active" fxLayoutAlign ="center center" >
+            <mat-card fxLayout="column" fxFlex.gt-xs="50" fxFlex.lt-sm="80" class="container">
+                <div fxLayoutAlign="center center" fxLayout="column" fxLayoutAlign ="center center" >
+                    The player	is	not	available
+                </div>
+            </mat-card>
+        </div>
+    </div>
 </div>

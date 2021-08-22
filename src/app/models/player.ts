@@ -50,3 +50,11 @@ export interface PlayerInfo{
     "successfulCrosses" : string,
     "goalsFromOutsideBox" :string
   }
+
+  export interface DisplayProfile {
+    "id": string,
+    "active": string,
+    "age": string,
+    "role": string,
+    "team": string
+  }
