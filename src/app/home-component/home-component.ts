@@ -1,5 +1,5 @@
 import { trigger, state, style, transition, animate } from "@angular/animations";
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { DisplayProfile, PlayerDetails, PlayerInfo } from "../models/player";
 import { HomeComponentService } from "../service/home-component.service";
@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
     showSearch: boolean = false;
 
     constructor( private readonly homeComponentService: HomeComponentService,
+        private cdr: ChangeDetectorRef,
         private readonly fb: FormBuilder ) {
         this.playerSearchForm = this.fb.group({
             playerName: new FormControl('',Validators.pattern("[a-zA-Z][a-zA-Z0-9 ]*")),
@@ -40,6 +41,7 @@ export class HomeComponent implements OnInit {
         setTimeout(()=> {
             this.showSearch = true;
         },600);
+        this.cdr.detectChanges();
     }
 
     get getForm(){
