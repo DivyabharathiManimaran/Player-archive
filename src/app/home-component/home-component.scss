@@ -1,19 +1,24 @@
 .heading {
     font-family: fantasy;
-    font-size: 28px;   
-    color: #fff; 
-    // color: darkblue;
-    padding: 0 8px;
+    font-size: 38px;
+    background-color: maroon;
+    padding: 0 16px;
 }
 .container {
     margin-top: 50px;
 }
+.form-shadow {
+    ::ng-deep .mat-form-field-flex {        
+    box-shadow: 5px 5px 20px grey;
+    }
+}
 
 .button-margin {
-    margin-left: 16px;
-    margin-bottom: 20px;
-    background: darkgreen;
+    margin-left: 30px;
+    margin-bottom: 20px;    
+    border-radius: 20px;
     color: white;
+    box-shadow: 5px 5px 20px grey;
 }
 
 .sub-heading {

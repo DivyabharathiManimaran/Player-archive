@@ -1,17 +1,15 @@
 <div fxFlexFill fxLayout="column" class="scroll-container" fxLayoutAlign ="start start">
-    <div fxFlex fxLayout="column" fxLayoutAlign ="start stretch">
-        <div fxFlex fxLayout="row" fxLayoutAlign ="center center"><div class="heading">PLAYER ARCHIVE</div></div>
-    </div>
+    <div fxFlexFill fxLayout="row" fxLayoutAlign ="center center">
+        <div fxLayout="column" class="heading secondary-text">PLAYER ARCHIVE</div></div>
     <div fxLayout="column" fxFlexFill class="scroll-container" fxLayouAlign="start stretch">
         <div fxLayout="row" fxLayoutAlign ="center center" @appearIn *ngIf="showSearch">
-            <mat-card fxLayout="column" fxFlex.gt-xs="50" fxFlex.lt-sm="80" class="container"   fxLayoutAlign ="center center" >
+            <mat-card fxLayout="column" fxFlex.gt-xs="30" fxFlex.lt-sm="80" class="container primary-border"   fxLayoutAlign ="center center" >
                 <form [formGroup]="playerSearchForm">
                         <div fxLayoutAlign="center" class="sub-heading"> Search</div>
                         <div fxLayout="row wrap" fxLayoutAlign ="center center">
                                 <div fxLayout="column">
-                                    <mat-form-field  appearance="fill">
+                                    <mat-form-field class="form-shadow" appearance="fill">
                                         <mat-label>Enter Player's Id </mat-label>                                
-                                        <!-- charOnly -->
                                         <input
                                         appFocus
                                         autocomplete="off"
@@ -27,7 +25,7 @@
                                 </div>
                             <div fxLayout="row">
                                 <button
-                                class="primary button-margin"
+                                class="primary primary-background secondary-text button-margin"
                                 [disabled]="!playerNameVal || playerSearchForm.invalid"
                                 (click)="search()" 
                                 mat-raised-button mat-primary>	<mat-icon inline=true> directions_run</mat-icon> Go </button>
@@ -37,7 +35,7 @@
             </mat-card>
         </div>
         <div @appearIn fxLayout="row" *ngIf="showResult && active" fxLayoutAlign ="center center" >
-            <mat-card fxLayout="column" fxFlex.gt-xs="50" fxFlex.lt-sm="80" class="container">
+            <mat-card fxLayout="column" fxFlex.gt-xs="30" fxFlex.lt-sm="80" class="container primary-border">
                 <div fxLayout="row" fxFlex fxLayoutAlign="center center" class="sub-heading">Player Details
                 </div>
                 <div fxLayoutAlign="start start" fxLayout="column">
@@ -51,9 +49,9 @@
             </mat-card>
         </div>
         <div @appearIn fxLayout="row" *ngIf="showResult && !active" fxLayoutAlign ="center center" >
-            <mat-card fxLayout="column" fxFlex.gt-xs="50" fxFlex.lt-sm="80" class="container">
+            <mat-card fxLayout="column" fxFlex.gt-xs="30" fxFlex.lt-sm="80" class="container primary-border">
                 <div fxLayoutAlign="center center" fxLayout="column" fxLayoutAlign ="center center" >
-                    The player	is	not	available
+                    <span>The player is	not	available</span>
                 </div>
             </mat-card>
         </div>

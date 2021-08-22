@@ -33,13 +33,18 @@ $myApp-theme: mat.define-light-theme((
 @include mat.all-component-themes($myApp-theme);
 
 /* You can add global styles to this file, and also import other style files */
+@import "./app-theme.scss";
 
 body {
-    background-image: url('assets/images/bg-3.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-  }
-  .scroll-container {
-    overflow-y: auto;
-  }
+  background-image: url('assets/images/bg-3.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+mat-card {
+  border-radius: 20px !important;
+}
+
+.scroll-container {
+  overflow-y: auto;
+}
