@@ -1,7 +1,38 @@
-.search-container {
- width: fit-content;;
+.heading {
+    font-family: fantasy;
+    font-size: 28px;   
+    color: #fff; 
+    // color: darkblue;
+    padding: 0 8px;
 }
-.mat-card {
-    background: #fff;
-    color: #000;
+.container {
+    margin-top: 50px;
+}
+
+.button-margin {
+    margin-left: 16px;
+    margin-bottom: 20px;
+    background: darkgreen;
+    color: white;
+}
+
+.sub-heading {
+    padding-bottom: 20px;
+    font-family: Tahoma, sans-serif;
+    font-size: 28px;
+    color: maroon;
+}
+
+label {
+    margin-right: 4px;
+    font-family: monospace;
+    font-size: 16px;
+}
+span {
+    font-family: monospace;
+    font-size: 18px;
+    font-weight: 700;
+}
+mat-card {
+    background: ghostwhite;
 }
