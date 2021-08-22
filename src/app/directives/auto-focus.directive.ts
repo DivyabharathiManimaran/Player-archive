@@ -7,6 +7,8 @@ export class FocusDirective implements AfterViewInit {
   constructor(private host: ElementRef) {}
 
   ngAfterViewInit() {
-    this.host.nativeElement.focus();
+    setTimeout(()=> {
+      this.host.nativeElement.focus();
+    },100)
   } 
 }
