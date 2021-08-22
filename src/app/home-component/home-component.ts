@@ -1,4 +1,4 @@
-import { trigger, state, style, transition, animate } from "@angular/animations";
+import { trigger, state, style, transition, animate, keyframes } from "@angular/animations";
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { DisplayProfile, PlayerDetails, PlayerInfo } from "../models/player";
@@ -15,6 +15,13 @@ import { HomeComponentService } from "../service/home-component.service";
                 animate('600ms', style({ opacity: 1 })),
               ]),
         ]),
+        trigger('flyInOut', [
+            state('in', style({ transform: 'translateX(0)' })),
+            transition('void => *', [
+              style({ transform: 'translateX(-100%)' }),
+              animate(300)
+            ])
+          ])
       ]
 })
 
