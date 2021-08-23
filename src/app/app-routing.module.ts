@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home-component/home-component';
 
 const routes: Routes = [  
-  { path:'home-page', component:HomeComponent },
-  { path: '', redirectTo:'/home-page',pathMatch: 'full'},
+  { path:'player-archive', component:HomeComponent },
+  { path: '', redirectTo:'/player-archive',pathMatch: 'full'},
 ];
 
 @NgModule({
