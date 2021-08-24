@@ -14,14 +14,7 @@ import { HomeComponentService } from "../service/home-component.service";
                 style({ opacity: 0 }),
                 animate('600ms', style({ opacity: 1 })),
               ]),
-        ]),
-        trigger('flyInOut', [
-            state('in', style({ transform: 'translateX(0)' })),
-            transition('void => *', [
-              style({ transform: 'translateX(-100%)' }),
-              animate(300)
-            ])
-          ])
+        ])
       ]
 })
 
@@ -91,8 +84,4 @@ export class HomeComponent implements OnInit {
         })
 
     }
-    clear() {
-
-    }
-
 }
