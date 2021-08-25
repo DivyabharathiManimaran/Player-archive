@@ -1,6 +1,7 @@
 import { trigger, state, style, transition, animate, keyframes } from "@angular/animations";
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
+import { Subscription } from "rxjs";
 import { DisplayProfile, PlayerDetails, PlayerInfo } from "../models/player";
 import { HomeComponentService } from "../service/home-component.service";
 
@@ -18,7 +19,7 @@ import { HomeComponentService } from "../service/home-component.service";
       ]
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
 
     playerSearchForm !: FormGroup;
     playerNameVal!: string;
@@ -28,6 +29,8 @@ export class HomeComponent implements OnInit {
     showSearch: boolean = false;
     unavailable: boolean = false;
     prevPlayer:string ='';
+    playerDataSub?:Subscription;
+    playerProfileSub?: Subscription;
 
     constructor( private readonly homeComponentService: HomeComponentService,
         public cdr: ChangeDetectorRef,
@@ -38,7 +41,6 @@ export class HomeComponent implements OnInit {
             playerName: new FormControl('',Validators.pattern("[a-zA-Z][a-zA-Z0-9 ]*")),
         });
     }
-
     ngAfterViewInit() {
         setTimeout(()=> {
             this.showSearch = true;
@@ -56,7 +58,7 @@ export class HomeComponent implements OnInit {
             /** If to reduce repetition of API call when same player is searched consecutively */
             if(this.playerNameVal !== this.prevPlayer) {
                 this.prevPlayer = this.playerNameVal;
-                this.homeComponentService.getPlayerData(this.playerNameVal.toLowerCase()).subscribe((playerInfo : PlayerInfo) => {
+                this.playerDataSub = this.homeComponentService.getPlayerData(this.playerNameVal.toLowerCase()).subscribe((playerInfo : PlayerInfo) => {
                     this.showResult=true;
                     if(playerInfo && playerInfo.active && playerInfo.active === "true") {
                         this.fetchPlayerDetails(playerInfo["profile-id"]);
@@ -75,7 +77,7 @@ export class HomeComponent implements OnInit {
     }
 
     fetchPlayerDetails(profileId:string) { 
-        this.homeComponentService.getPlayerProfile(profileId).subscribe((playerDetails:PlayerDetails) => {
+        this.playerProfileSub = this.homeComponentService.getPlayerProfile(profileId).subscribe((playerDetails:PlayerDetails) => {
             if(playerDetails) {
                 this.active=true;
                 this.unavailable = false;
@@ -93,4 +95,11 @@ export class HomeComponent implements OnInit {
         })
 
     }
+
+    
+    ngOnDestroy() {
+        if(this.playerDataSub)this.playerDataSub.unsubscribe();
+        if(this.playerProfileSub)this.playerProfileSub.unsubscribe();
+    }
+
 }

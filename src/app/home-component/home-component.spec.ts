@@ -79,11 +79,14 @@ describe("HomeComponent", () => {
       );
       spyOn(component, "fetchPlayerDetails").and.callThrough();
       spyOn(homeComponentServiceStub, "getPlayerData").and.callThrough();
-      component.search();
       expect(component.playerNameVal).toBeUndefined();
+      component.playerNameVal='test';
+      component.search();
+      expect(component.playerNameVal).toBeDefined();
       expect(component.fetchPlayerDetails).toBeDefined();
       expect(homeComponentServiceStub.getPlayerData).toBeDefined();      
-      expect(homeComponentServiceStub.getPlayerData).not.toHaveBeenCalled();
+      expect(homeComponentServiceStub.getPlayerData).toBeTruthy();
+      expect(homeComponentServiceStub.getPlayerData).toHaveBeenCalledWith(component.playerNameVal);
     });
   });
 
@@ -95,7 +98,15 @@ describe("HomeComponent", () => {
       spyOn(homeComponentServiceStub, "getPlayerProfile").and.callThrough();
       component.search();      
       expect(homeComponentServiceStub.getPlayerProfile).toBeDefined();      
-      expect(homeComponentServiceStub.getPlayerProfile).not.toHaveBeenCalled();
+      expect(homeComponentServiceStub.getPlayerProfile).toBeTruthy();     
     });
   });
+  
+  describe("ngOnDestroy", () => {
+    it("does required operation", () => {
+      component.ngOnDestroy();
+      expect(component.playerDataSub).toBeUndefined();
+      expect(component.playerProfileSub).toBeUndefined();
+    })
+  })
 });
