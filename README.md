@@ -1,4 +1,12 @@
 # PlayerArchive
+<p>The goal	of this	project	is to create a simple player archive</p>
+
+<p> Test data: </p>
+<p> 1. fabio (Success scenario - player info displayed)</p>
+<p> 2. giorgio (Success scenario - player not found displayed)</p>
+<p> 3. francesco (Success scenario - player not found displayed)</p>
+<p> 4. any random text (Failure scenario - player not found displayed) </p>
+<hr>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1.
 
