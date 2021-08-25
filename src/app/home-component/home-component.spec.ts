@@ -15,7 +15,6 @@ describe("HomeComponent", () => {
   beforeEach(() => {
     const changeDetectorRefStub = () => ({ detectChanges: () => ({}) });
     const formBuilderStub = () => ({ group: () => ({}) });
-    // const formControlStub = () => ({ group: () => ({}) });
     const homeComponentServiceStub = () => ({
       getPlayerData: () => ({ subscribe: (f: (arg0: {}) => any) => f({}) }),
       getPlayerProfile: () => ({ subscribe: (f: (arg0: {}) => any) => f({}) })
