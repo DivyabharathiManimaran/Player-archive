@@ -4,7 +4,6 @@ import { HomeComponent } from './home-component/home-component';
 
 const routes: Routes = [  
   { path:'', component:HomeComponent },
-  // { path: '', redirectTo:'/player-archive', pathMatch: 'full'},
 ];
 
 @NgModule({
