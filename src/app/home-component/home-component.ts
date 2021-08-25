@@ -28,14 +28,14 @@ export class HomeComponent implements OnInit {
     showSearch: boolean = false;
 
     constructor( private readonly homeComponentService: HomeComponentService,
-        private cdr: ChangeDetectorRef,
-        private readonly fb: FormBuilder ) {
+        public cdr: ChangeDetectorRef,
+        private readonly fb: FormBuilder ) {}
+
+    ngOnInit() {
         this.playerSearchForm = this.fb.group({
             playerName: new FormControl('',Validators.pattern("[a-zA-Z][a-zA-Z0-9 ]*")),
         });
     }
-
-    ngOnInit() {}
 
     ngAfterViewInit() {
         setTimeout(()=> {
