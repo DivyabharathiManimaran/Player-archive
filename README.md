@@ -2,9 +2,11 @@
 <p>The goal	of this	project	is to create a simple player archive</p>
 <p>- Players information is displayed if the player is in active status (player:FABIO) </p>
 <p>- If the player is inactive(player: GIORGIO/FRANCESCO), or if there is no such player in the database(any random text), then a not found message will be dispalyed</p>
+<strong> View the site here - <a target="_blank" href="https://divyabharathimanimaran.github.io/web-home-task">Player Archive</a></strong>
 <br>
-<p> View the site here - <a target="_blank" href="https://divyabharathimanimaran.github.io/web-home-task">Player Archive</a></p>
 <br>
+<br>
+<p> Landing page</p>
 <img alt="Landing page" src="src/assets/images/landing page.jpeg"/>
 
 <p> Test data: </p>
