@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
     showResult:boolean = false;
     displayDetail?:DisplayProfile;
     showSearch: boolean = false;
+    unavailable: boolean = false;
+    prevPlayer:string ='';
 
     constructor( private readonly homeComponentService: HomeComponentService,
         public cdr: ChangeDetectorRef,
@@ -51,18 +53,24 @@ export class HomeComponent implements OnInit {
     search() {
         if(this.playerNameVal) {
             this.playerNameVal = this.playerNameVal.trim();
-            this.homeComponentService.getPlayerData(this.playerNameVal.toLowerCase()).subscribe((playerInfo : PlayerInfo) => {
-                this.showResult=true;
-                if(playerInfo && playerInfo.active && playerInfo.active === "true") {
-                    this.fetchPlayerDetails(playerInfo["profile-id"]);
-                } else {
+            /** If to reduce repetition of API call when same player is searched consecutively */
+            if(this.playerNameVal !== this.prevPlayer) {
+                this.prevPlayer = this.playerNameVal;
+                this.homeComponentService.getPlayerData(this.playerNameVal.toLowerCase()).subscribe((playerInfo : PlayerInfo) => {
+                    this.showResult=true;
+                    if(playerInfo && playerInfo.active && playerInfo.active === "true") {
+                        this.fetchPlayerDetails(playerInfo["profile-id"]);
+                    } else {
+                        this.active=false;
+                        this.unavailable = true;
+                    }
+                },()=> {
+                    this.showResult=true;
                     this.active=false;
-                }
-            },()=> {
-                this.showResult=true;
-                this.active=false;          
-                console.log("Something went wrong with the PLAYER DATA API");
-            });
+                    this.unavailable = true;         
+                    console.log("Something went wrong with the PLAYER DATA API");
+                });
+            }
         }
     }
 
@@ -70,6 +78,7 @@ export class HomeComponent implements OnInit {
         this.homeComponentService.getPlayerProfile(profileId).subscribe((playerDetails:PlayerDetails) => {
             if(playerDetails) {
                 this.active=true;
+                this.unavailable = false;
                 this.displayDetail = {
                     id: playerDetails.id,
                     active: 'true',
