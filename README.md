@@ -1,18 +1,19 @@
 # PlayerArchive
 <p>The goal	of this	project	is to create a simple player archive</p>
-<p>- Players information is displayed if the player is in active status</p>
-<p>- If the player is inactive or if there is no such player in the database, then a not found message will be dispalyed</p>
+<p>- Players information is displayed if the player is in active status (player:FABIO) </p>
+<p>- If the player is inactive(player: GIORGIO/FRANCESCO), or if there is no such player in the database(any random text), then a not found message will be dispalyed</p>
+<br>
+<p> View the site here - <a target="_blank" href="https://divyabharathimanimaran.github.io/web-home-task">Player Archive</a></p>
+<br>
+<img alt="Landing page" src="src/assets/images/landing page.jpeg"/>
+
 <p> Test data: </p>
-<img alt="Fanding page" src="src/assets/images/landing page.jpeg"/>
 <p> 1. fabio (Success scenario - player info displayed)</p>
 <img alt="Fabio serach result" src="src/assets/images/fabio.jpeg"/>
 <p> 2. giorgio (Success scenario - player not found displayed)</p>
 <img alt="Giorgio search result" src="src/assets/images/giorgio.jpeg"/>
-<p> 3. francesco (Success scenario - player not found displayed)</p>
+<p> 3. any random text (Failure scenario + Validations) </p>
 <img alt="Random text with validation" src="src/assets/images/test+validation.jpeg"/>
-<p> 4. any random text (Failure scenario - player not found displayed) </p>
-<br/>
-<p> View the site here - <a target="_blank" href="https://divyabharathimanimaran.github.io/web-home-task">Player Archive</a></p>
 
 <hr>
 
