@@ -3,7 +3,7 @@
 <p>- A simple search form is used for searching the player with the name/id</p> 
 <p>- After search, player's information is displayed if the player is in active status (player:FABIO) </p>
 <p>- If the player is inactive(player: GIORGIO/FRANCESCO), or if there is no such player in the database(any random text), then a not found message will be dispalyed</p>
-<strong> View the site here - <a target="_blank" href="https://divyabharathimanimaran.github.io/player-archive">Player Archive</a></strong>
+<strong> View the site here - <a target="_blank" href="https://divyabharathimanimaran.github.io/Player-archive">Player Archive</a></strong>
 <br>
 <br>
 <br>
