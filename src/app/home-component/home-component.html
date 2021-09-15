@@ -35,17 +35,17 @@
                     </form>
             </mat-card>
         </div>
-        <div @appearIn fxLayout="row" *ngIf="showResult && active" fxLayoutAlign ="center center" >
+        <div @flyInOut fxLayout="row" *ngIf="showResult && active" fxLayoutAlign ="center center" >
             <mat-card fxLayout="column" fxFlex.gt-md="30" fxFlex.lt-lg="50" fxFlex.lt-sm="80" class="container primary-border">
                 <div fxLayout="row" fxFlex fxLayoutAlign="center center" class="sub-heading">Player Details
                 </div>
                 <div fxLayoutAlign="start start" fxLayout="column">
-                    <div><label>Id:</label><span>{{ (displayDetail?.id | titlecase) || '-'}}</span></div>
-                    <div><label>Active:</label><span>{{ (displayDetail?.active || 'False')  | titlecase}}</span></div>
+                    <div><span class="label">Id:</span><span>{{ (displayDetail?.id | titlecase) || '-'}}</span></div>
+                    <div><span class="label">Active:</span><span>{{ (displayDetail?.active || 'False')  | titlecase}}</span></div>
                     <br>
-                    <div><label>Age:</label><span>{{ displayDetail?.age || '-'}}</span></div>
-                    <div><label>Role:</label><span>{{ (displayDetail?.role | titlecase) || '-'}}</span></div>
-                    <div><label>Team: </label><span>{{ (displayDetail?.team | titlecase) || '-'}}</span></div>
+                    <div><span class="label">Age:</span><span>{{ displayDetail?.age || '-'}}</span></div>
+                    <div><span class="label">Role:</span><span>{{ (displayDetail?.role | titlecase) || '-'}}</span></div>
+                    <div><span class="label">Team: </span><span>{{ (displayDetail?.team | titlecase) || '-'}}</span></div>
                 </div>
             </mat-card>
         </div>

@@ -15,14 +15,21 @@ import { HomeComponentService } from "../service/home-component.service";
                 style({ opacity: 0 }),
                 animate('600ms', style({ opacity: 1 })),
               ]),
-        ])
+        ]),
+        trigger('flyInOut', [
+            state('in', style({ transform: 'translateY(0)' })),
+            transition('void => *', [
+              style({ transform: 'translateX(-100%)' }),
+              animate(600)
+            ])
+          ])
       ]
 })
 
 export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
 
     playerSearchForm !: FormGroup;
-    playerNameVal!: string;
+    playerNameVal?: string;
     active:boolean = false;
     showResult:boolean = false;
     displayDetail?:DisplayProfile;
@@ -57,6 +64,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
             this.playerNameVal = this.playerNameVal.trim();
             /** If to reduce repetition of API call when same player is searched consecutively */
             if(this.playerNameVal !== this.prevPlayer) {
+                this.showResult=false;
                 this.prevPlayer = this.playerNameVal;
                 this.playerDataSub = this.homeComponentService.getPlayerData(this.playerNameVal.toLowerCase()).subscribe((playerInfo : PlayerInfo) => {
                     this.showResult=true;
