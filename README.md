@@ -13,9 +13,7 @@
 <p> Test data: </p>
 <p> 1. fabio (Success scenario - player info displayed)</p>
 <img alt="Fabio serach result" src="src/assets/images/fabio.jpeg"/>
-<p> 2. giorgio (Success scenario - player not found displayed)</p>
-<img alt="Giorgio search result" src="src/assets/images/giorgio.jpeg"/>
-<p> 3. any random text (Failure scenario + Validations) </p>
+<p> 2. any random text (Failure scenario + Validations) </p>
 <img alt="Random text with validation" src="src/assets/images/test+validation.jpeg"/>
 
 <hr>
